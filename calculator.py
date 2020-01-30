@@ -8,6 +8,24 @@ root.title("TI-Normal Caluclator")
 canvas = tk.Canvas(root, height = height, width = width)
 canvas.pack()
 
+def key(event):
+	char = None
+	if type(event) == str:
+		char = "="
+	else:
+		char = event.char
+	if char.isdigit():
+		buttonNum(int(char))
+	elif char in ["+", "-", "x", "÷", "."]:
+		buttonNum(event.char)
+	elif char == "=":
+		calculate()
+	elif char == "C":
+		reset()
+
+root.bind("<Key>", key)
+root.bind("<Return>", lambda x: key("="))
+
 frame = tk.Frame(root, bg = '#CFFFF7')
 frame.place(relwidth = 1, relheight = 1)
 
